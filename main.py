@@ -11,7 +11,38 @@ def sort_preceptorials():
 	preceptorial_max = {} # Key: preceptorials, value: capacity
 
 	# Fill out preceptorial_max
-
+	while True:
+		curr_precept = i("Enter a preceptorial.")
+		while True:
+			try:
+				curr_precept_max = int(i("How many students can {:s} hold?".format(curr_precept)))
+			except ValueError:
+				print("Please print a number.")
+			else:
+				break
+		print("The preceptorial {:s} can fit {:d} students.".format(curr_precept, curr_precept_max))
+		correct = i("Is this correct? (y/n)")
+		if(correct == "n"):
+			continue
+		preceptorial_max[curr_precept] = curr_precept_max
+		more_precepts = i("You have entered {:d} preceptorials. Would you like to enter more? (y/n/c/v)".format(len(preceptorial_max)))
+		if(more_precepts == "c"):
+			confirm = i("Just to confirm, you want to clear all preceptorials? (y/n)")
+			if(confirm == "y"):
+				preceptorial_max = {}
+				print("Preceptorials cleared.")
+				continue
+			more_precepts = i("You have entered {:d} preceptorials. Would you like to enter more? (y/n/v)")
+		if(more_precepts == "v"):
+			view_precepts = "*" * 20 + "\n"
+			for key, value in preceptorial_max.items():
+				view_precepts += key + ": can fit " + value + " students\n"
+			view_precepts += "*" * 20
+			print(view_precepts)
+			more_precepts = i("You have entered {:d} preceptorials. Would you like to enter more? (y/n)")
+		if(more_precepts == "n"):
+			break
+			
 	# Fill out student_preferences.
 	while True:
 		curr_student = i("Enter a student name.")
