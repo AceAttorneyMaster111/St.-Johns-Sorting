@@ -11,6 +11,7 @@ def sort_preceptorials():
 	print('Instructions: Follow the prompts. When prompted for single letter answers, "y" is "yes", "n" is "no", "c" is "cancel" (cancel the current operation rather than just the current iteration), and "v" is view, as in view all responses to the current operation. Type ^d (control + d) at any time to exit the program.')
 	student_preferences = {} # Key: Student name, value: list of tuples of preceptorials and favorite status.
 	preceptorial_max = {} # Key: preceptorials, value: capacity
+	students = [] # Student name
 
 	# Fill out preceptorial_max
 	while True:
@@ -72,6 +73,7 @@ def sort_preceptorials():
 				break
 		if(more_reqs == "c"):
 			continue
+		students.append(curr_student)
 		student_preferences[curr_student] = curr_reqs
 		more_students = i("You currently have entered {:d} students. Would you like to enter more? (y/n/c/v)".format(len(student_preferences)))
 		if(more_students == "v"):
@@ -88,8 +90,11 @@ def sort_preceptorials():
 			confirm = i("Just to confirm, you want to clear all students? (y/n)")
 			if(confirm == "y"):
 				student_preferences = {}
+				students = []
 				print("Students cleared.")
 				continue
 			more_students = i("You currently have entered {:d} students. Would you like to enter more? (y/n)".format(len(student_preferences)))
 		if(more_students == "n"):
 			break
+	preceptorial_students = {} # Key: preceptorials, value: list of students.
+	# Step 1: Put all students into their preferred preceptorials.
