@@ -11,14 +11,15 @@ def sort_preceptorials():
 	print('Instructions: Follow the prompts. When prompted for single letter answers, "y" is "yes", "n" is "no", "c" is "cancel" (cancel the current operation rather than just the current iteration), and "v" is view, as in view all responses to the current operation. Type ^d (control + d) at any time to exit the program.')
 	student_preferences = {} # Key: Student name, value: list of tuples of preceptorials and favorite status.
 	preceptorial_max = {} # Key: preceptorials, value: capacity
+	preceptorial_min = {} # Key: preceptorials, value: capacity
 	students = [] # Student name
 
-	# Fill out preceptorial_max
+	# Fill out preceptorial_max and preceptorial_min
 	while True:
 		curr_precept = i("Enter a preceptorial.")
 		while True:
 			try:
-				curr_precept_max = int(i("How many students can {:s} hold?".format(curr_precept)))
+				curr_precept_max = int(i("What is the maximum students that {:s} can hold?".format(curr_precept)))
 			except ValueError:
 				print("Please print a number.")
 			else:
