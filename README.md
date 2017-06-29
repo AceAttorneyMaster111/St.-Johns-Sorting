@@ -2,7 +2,7 @@
 ## To User
 Here are the steps to use this program:
 
-1. Download Python 3 from [here](https://www.python.org/downloads/release/python-352/) by scrolling down to Files and choosing the file that most matches your operating system. Follow all installation instructions.
+1. Download Python 3 from [here](https://www.python.org/downloads/) by selecting the latest Python 3 download (3.?.?) for your operating system. This should be at the top of your screen. Follow all installation instructions.
 
 2. Click on the green Clone or Download button above here and click Download ZIP. Open the ZIP file in Finder/Windows Explorer/etc.
 
@@ -20,7 +20,7 @@ Here are the steps to use this program:
 5. Follow instructions in program.
 
 ## To Developers
-Follow step 1 above to download python 3.
+Follow step 1 above to download Python 3.
 
 Are you AceAttorneyMaster111 or Lionclaw49? If not, click Fork at the top of the page and follow instructions.
 
