@@ -24,29 +24,33 @@ def sort_preceptorials():
 	while True:
 		curr_student = inp("Enter a student name.")
 		curr_reqs = []
-		while True:
+		for i in range(3):
 			curr_req = inp("Enter a requested preceptorial.")
-			req_preferred = inp("Is this request preferred? (y/n)") == "y" # This will be true or false
+			for req in curr_reqs.keys() if curr_reqs else range(1):
+				try:
+					if(curr_reqs[req][1]):
+						req_preferred = False
+						break;
+					else:
+						req_preferred = inp("Is this request preferred? (y/n)") == "y" # This will be True or False
+				except IndexError:
+					req_preferred = inp("Is this request preferred? (y/n)") == "y"
 			print("You entered a {:s}preferred preceptorial \"{:s}\".".format("non-" if not req_preferred else "", curr_req))
 			correct = inp("Is this correct? (y/n)")
 			if(correct == "n"):
 				continue
 			curr_reqs.append((curr_req, req_preferred))
-			more_reqs = inp("You currently have entered {:s} requests for {:s}. Would you like to enter more? (y/n/c/v)".format(len(curr_reqs), curr_student))
-			if(more_reqs == "v"):
-				view_reqs = "*" * 20 + "\n"
-				for value in curr_reqs:
-					view_reqs += value[0] + "- " + ("non-" if not value[1] else "") + "preferred\n"
-				view_reqs += "*" * 20
-				print(view_reqs)
-				more_reqs = inp("You currently have entered {:d} requests for {:d}. Would you like to enter more? (y/n/c)?".format(len(curr_reqs), curr_student))
-			if(more_reqs == "c"):
-				print("Student {:s} canceled.".format(curr_student))
-				break
-			elif(more_reqs == "n"):
-				break
-		if(more_reqs == "c"):
-			continue
+		view_reqs = curr_student + ":\n"
+		view_reqs += "*" * 20 + "\n"
+		for value in curr_reqs:
+			view_reqs += value[0] + "- " + ("non-" if not value[1] else "") + "preferred\n"
+		view_reqs += "*" * 20
+		print(view_reqs)
+		correct = inp("Is this correct? (y/n)")
+		if(not correct == "y"):
+			confirm = inp("Are you sure you want to cancel " + curr_student + "? (y/n)")
+			if(confirm == y):
+				print("Student canceled.")
 		# students.append(curr_student) # deprecated
 		student_preferences[curr_student] = curr_reqs
 		more_students = inp("You currently have entered {:d} students. Would you like to enter more? (y/n/c/v)".format(len(student_preferences)))
