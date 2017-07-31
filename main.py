@@ -4,69 +4,42 @@
 
 # Version: 0.0.1
 
-def i(question):
+# TODO: Change to accept three and only three precepts per student
+
+def inp(question):
 	return input(question + " ")
 
 def sort_preceptorials():
 	print('Instructions: Follow the prompts. When prompted for single letter answers, "y" is "yes", "n" is "no", "c" is "cancel" (cancel the current operation rather than just the current iteration), and "v" is view, as in view all responses to the current operation. Type ^d (control + d) at any time to exit the program.')
 	student_preferences = {} # Key: Student name, value: list of tuples of preceptorials and favorite status.
-	preceptorial_max = {} # Key: preceptorials, value: capacity
-	preceptorial_min = {} # Key: preceptorials, value: capacity
+	PRECEPT_MAX = 12;
+	PRECEPT_MIN = 3;
 	students = [] # Student name
-
-	# Fill out preceptorial_max and preceptorial_min
-	while True:
-		curr_precept = i("Enter a preceptorial.")
-		while True:
-			try:
-				curr_precept_max = int(i("What is the maximum students that {:s} can hold?".format(curr_precept)))
-			except ValueError:
-				print("Please print a number.")
-			else:
-				break
-		print("The preceptorial {:s} can fit {:d} students.".format(curr_precept, curr_precept_max))
-		correct = i("Is this correct? (y/n)")
-		if(correct == "n"):
-			continue
-		preceptorial_max[curr_precept] = curr_precept_max
-		more_precepts = i("You have entered {:d} preceptorials. Would you like to enter more? (y/n/c/v)".format(len(preceptorial_max)))
-		if(more_precepts == "c"):
-			confirm = i("Just to confirm, you want to clear all preceptorials? (y/n)")
-			if(confirm == "y"):
-				preceptorial_max = {}
-				print("Preceptorials cleared.")
-				continue
-			more_precepts = i("You have entered {:d} preceptorials. Would you like to enter more? (y/n/v)")
-		if(more_precepts == "v"):
-			view_precepts = "*" * 20 + "\n"
-			for key, value in preceptorial_max.items():
-				view_precepts += key + ": can fit " + value + " students\n"
-			view_precepts += "*" * 20
-			print(view_precepts)
-			more_precepts = i("You have entered {:d} preceptorials. Would you like to enter more? (y/n)")
-		if(more_precepts == "n"):
-			break
-			
+	""" TODO: do this
+	# Fill out students
+	preceptorials = []
+	# Fill out preceptorials
+	"""
 	# Fill out student_preferences.
 	while True:
-		curr_student = i("Enter a student name.")
+		curr_student = inp("Enter a student name.")
 		curr_reqs = []
 		while True:
-			curr_req = i("Enter a requested preceptorial.")
-			req_preferred = 1 if i("Is this request preferred? (y/n)") == "y" else 0
-			print("You entered a {:s}preferred preceptorial \"{:s}\".".format("non-" if req_preferred == 0 else "", curr_req))
-			correct = i("Is this correct? (y/n)")
+			curr_req = inp("Enter a requested preceptorial.")
+			req_preferred = inp("Is this request preferred? (y/n)") == "y" # This will be true or false
+			print("You entered a {:s}preferred preceptorial \"{:s}\".".format("non-" if not req_preferred else "", curr_req))
+			correct = inp("Is this correct? (y/n)")
 			if(correct == "n"):
 				continue
 			curr_reqs.append((curr_req, req_preferred))
-			more_reqs = i("You currently have entered {:s} requests for {:s}. Would you like to enter more? (y/n/c/v)".format(len(curr_reqs), curr_student))
+			more_reqs = inp("You currently have entered {:s} requests for {:s}. Would you like to enter more? (y/n/c/v)".format(len(curr_reqs), curr_student))
 			if(more_reqs == "v"):
 				view_reqs = "*" * 20 + "\n"
 				for value in curr_reqs:
-					view_reqs += value[0] + "- " + ("non-" if value[1] == 0 else "") + "preferred\n"
+					view_reqs += value[0] + "- " + ("non-" if not value[1] else "") + "preferred\n"
 				view_reqs += "*" * 20
 				print(view_reqs)
-				more_reqs = i("You currently have entered {:d} requests for {:d}. Would you like to enter more? (y/n/c)?".format(len(curr_reqs), curr_student))
+				more_reqs = inp("You currently have entered {:d} requests for {:d}. Would you like to enter more? (y/n/c)?".format(len(curr_reqs), curr_student))
 			if(more_reqs == "c"):
 				print("Student {:s} canceled.".format(curr_student))
 				break
@@ -74,9 +47,9 @@ def sort_preceptorials():
 				break
 		if(more_reqs == "c"):
 			continue
-		students.append(curr_student)
+		# students.append(curr_student) # deprecated
 		student_preferences[curr_student] = curr_reqs
-		more_students = i("You currently have entered {:d} students. Would you like to enter more? (y/n/c/v)".format(len(student_preferences)))
+		more_students = inp("You currently have entered {:d} students. Would you like to enter more? (y/n/c/v)".format(len(student_preferences)))
 		if(more_students == "v"):
 			view_students = ("*" * 20 + "\n") * 2 + "\n"
 			for key, values in student_preferences.items():
@@ -86,15 +59,15 @@ def sort_preceptorials():
 				view_students += "\n" + "*" * 20 + "\n" + ("\n" if value != values[-1] else "")
 			view_students += ("*" * 20 + "\n") + "\n"
 			print(view_students)
-			more_students = i("You currently have entered {:d} students. Would you like to enter more? (y/n/c)".format(len(student_preferences)))
+			more_students = inp("You currently have entered {:d} students. Would you like to enter more? (y/n/c)".format(len(student_preferences)))
 		if(more_students == "c"):
-			confirm = i("Just to confirm, you want to clear all students? (y/n)")
+			confirm = inp("Just to confirm, you want to clear all students? (y/n)")
 			if(confirm == "y"):
 				student_preferences = {}
-				students = []
+				# students = []
 				print("Students cleared.")
 				continue
-			more_students = i("You currently have entered {:d} students. Would you like to enter more? (y/n)".format(len(student_preferences)))
+			more_students = inp("You currently have entered {:d} students. Would you like to enter more? (y/n)".format(len(student_preferences)))
 		if(more_students == "n"):
 			break
 	preceptorial_students = {} # Key: preceptorials, value: list of students.
