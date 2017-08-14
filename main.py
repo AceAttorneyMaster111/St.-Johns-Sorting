@@ -6,7 +6,7 @@
 
 # TODO: Change to accept three and only three precepts per student
 
-def inp(question):
+"""def inp(question):
 	return input(question + " ")
 
 def sort_preceptorials():
@@ -15,11 +15,11 @@ def sort_preceptorials():
 	PRECEPT_MAX = 12;
 	PRECEPT_MIN = 3;
 	students = [] # Student name
-	""" TODO: do this
+	""TODO: do this
 	# Fill out students
 	preceptorials = []
 	# Fill out preceptorials
-	"""
+	""
 	# Fill out student_preferences.
 	while True:
 		curr_student = inp("Enter a student name.")
@@ -75,4 +75,5 @@ def sort_preceptorials():
 		if(more_students == "n"):
 			break
 	preceptorial_students = {} # Key: preceptorials, value: list of students.
-	# Step 1: Put all students into their preferred preceptorials.
+	# Step 1: Put all students into their preferred preceptorials."""
+	
