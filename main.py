@@ -6,6 +6,13 @@
 
 # TODO: Change to accept three and only three precepts per student
 
+
+
+
+
+
+
+
 """def inp(question):
 	return input(question + " ")
 
